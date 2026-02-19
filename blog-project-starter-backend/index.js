@@ -1,5 +1,5 @@
 // server.js
-
+ require("dotenv").config()
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -12,9 +12,16 @@ app.use(cors())
 app.use(bodyParser.json());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI).then(()=>{                             //mongoose.connect('mongodb://localhost:27017')
-    console.log("Connection Successfull")
-})
+mongoose.connect(process.env.MONGO_URI, {     //mongoose.connect('mongodb://localhost:27017
+      useNewUrlParser: true,
+      useUnifiedTopology: true 
+      }).then(()=>{
+console.log("MongoDB Connected")
+      }).catch((err) => {
+        console.log("MongoDB connection error:",err)
+      })
+                                                                    
+                                                                    
 
 
 // Define Schema
