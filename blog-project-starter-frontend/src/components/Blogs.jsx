@@ -67,10 +67,10 @@ function Blogs() {
 
 
         const likes = 0
-        axios.post("http://localhost:5000/api/blogs", { newTitle, date, newContent, likes }).then((res) => {
+        axios.post(`${API_URL}/api/blogs`, { newTitle, date, newContent, likes }).then((res) => {
             console.log(res.data)
 
-            axios.get("http://localhost:5000/api/blogs").then((res) => {
+            axios.get(`${API_URL}/api/blogs`).then((res) => {
                 console.log(res.data)
                 setBlogs(res.data)
             }).catch(() => {
