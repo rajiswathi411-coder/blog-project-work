@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios"
 import Footer from './common/Footer';
-import auth from "../config/firebase"
+import auth from "../config/firebase";
+const API_URL = Process.env.REACT_APP_API_URL;
 function Blogs() {
 
     const [blogs, setBlogs] = useState([]);
@@ -28,7 +29,7 @@ function Blogs() {
   console.log("user Logged Out")
  }
   })
-        axios.get("https://blog-project-work-ta20.onrender.com/api/blogs").then((res) => {
+        axios.get(`${API_URL}/api/blogs`).then((res) => {
             console.log(res.data)
             setBlogs(res.data)
         }).catch(() => {
@@ -44,10 +45,10 @@ function Blogs() {
 
     const handleLike = async (blog_id) => {
         try {
-            const response = await axios.patch(`http://localhost:5000/api/blogs/like/${blog_id}`);
+            const response = await axios.patch(`${API_URL}/api/blogs/like/${blog_id}`);
             // After successfully updating the likes count in the backend, fetch the updated list of blogs
             if (response.status === 200) {
-                axios.get("http://localhost:5000/api/blogs").then((res) => {
+                axios.get(`${API_URL}/api/blogs`).then((res) => {
                     console.log(res.data)
                     setBlogs(res.data)
                 }).catch(() => {
